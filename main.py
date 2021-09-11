@@ -281,7 +281,7 @@ class Piece:
                     draw_board(places_list)
                     draw_pieces(name)
                     new_posy -= 1
-                    time.sleep(0.1)
+                    time.sleep(0.003)
                 else:
                     pass
         pieces[name] = Piece(x, y, piece, color, name, True)
