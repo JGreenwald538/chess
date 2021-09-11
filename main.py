@@ -44,18 +44,22 @@ def draw_board(placess = ""):
     global creation
     if not placess == "":
         for i in range(0, len(placess), 2):
-            print(placess[i], placess[i+1])
-            if (not placess[i] % 2 == 0) and (not placess[i+1] % 2 == 0):
+            even_y = placess[i] % 2 == 0
+            even_x = placess[i+1] % 2 == 0
+            odd_y = not placess[i] % 2 == 0
+            odd_x = not placess[i + 1] % 2 == 0
+
+            if odd_y and odd_x:
                 pygame.draw.rect(screen, yellow, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE) - SQUARESIZE,
                                                   SQUARESIZE, SQUARESIZE))
-            if (placess[i] % 2 == 0) and (not placess[i+1] % 2 == 0):
-                pygame.draw.rect(screen, purple, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE) + SQUARESIZE,
+            elif even_y and odd_x:
+                pygame.draw.rect(screen, purple, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE) - SQUARESIZE,
                                                   SQUARESIZE, SQUARESIZE))
-            if (placess[i] % 2 == 0) and (placess[i+1] % 2 == 0):
-                pygame.draw.rect(screen, yellow, ((placess[i + 1] * SQUARESIZE) + SQUARESIZE, (placess[i] * SQUARESIZE) + SQUARESIZE,
+            elif even_y and even_x:
+                pygame.draw.rect(screen, yellow, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE) - SQUARESIZE,
                                                   SQUARESIZE, SQUARESIZE))
-            if (not placess[i] % 2 == 0) and (placess[i+1] % 2 == 0):
-                pygame.draw.rect(screen, purple, ((placess[i + 1] * SQUARESIZE) + SQUARESIZE, (placess[i] * SQUARESIZE) - SQUARESIZE,
+            elif odd_y and even_x:
+                pygame.draw.rect(screen, purple, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE) - SQUARESIZE,
                                                   SQUARESIZE, SQUARESIZE))
     if placess == "":
         for r in range(ROW_COUNT):
@@ -274,8 +278,9 @@ class Piece:
                     if new_posy/SQUARESIZE == self.y:
                         for p in range(abs(self.y-y)+1):
                             p = p*-1
-                            places_list.append(self.y+p-1)
-                            places_list.append(x-1)
+                            places_list.append(self.y+p)
+                            places_list.append(x)
+                            print(places_list)
                     del pieces[name]
                     pieces[name] = Piece(x, new_posy/SQUARESIZE, piece, color, name, True)
                     draw_board(places_list)
@@ -304,7 +309,7 @@ class Piece:
                         pygame.display.update()
                         selected = False
 
-                    pygame.draw.lines(screen, YELLOW, True, [((self.x*SQUARESIZE)-SQUARESIZE,
+                    pygame.draw.lines(screen, YELLOW, True, [((self.x*SQUARESIZE)-SQUARESIZE-5,
                                                               (self.y*SQUARESIZE)-SQUARESIZE),
                                                              ((self.x*SQUARESIZE), (self.y*SQUARESIZE)-SQUARESIZE),
                                                              ((self.x*SQUARESIZE), (self.y*SQUARESIZE)),
