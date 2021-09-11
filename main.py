@@ -280,7 +280,6 @@ class Piece:
                             p = p*-1
                             places_list.append(self.y+p)
                             places_list.append(x)
-                            print(places_list)
                     del pieces[name]
                     pieces[name] = Piece(x, new_posy/SQUARESIZE, piece, color, name, True)
                     draw_board(places_list)
