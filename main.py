@@ -261,6 +261,7 @@ class Piece:
         x -= 1
         y -= 1
 
+    # noinspection PyTypeChecker
     def move_piece(self, x, y):
         global selected, turn
         places_list = []
@@ -287,7 +288,79 @@ class Piece:
                     new_posy -= 1
                     time.sleep(0.003)
                 else:
-                    pass
+                    if new_posy / SQUARESIZE == self.y:
+                        for p in range(abs(self.y - y) + 1):
+                            p = p * 1
+                            places_list.append(self.y + p)
+                            places_list.append(x)
+                    del pieces[name]
+                    pieces[name] = Piece(x, new_posy / SQUARESIZE, piece, color, name, True)
+                    draw_board(places_list)
+                    draw_pieces(name)
+                    new_posy += 1
+                    time.sleep(0.003)
+        elif math.floor(new_posy/SQUARESIZE) == y and not int(new_posx/SQUARESIZE) == x:
+            for i in range(SQUARESIZE*(abs(self.x-x))):
+                if self.x > x:
+                    if new_posx/SQUARESIZE == self.x:
+                        for p in range(abs(self.x-x)+1):
+                            p *= -1
+                            places_list.append(y)
+                            places_list.append(self.x+p)
+                    del pieces[name]
+                    pieces[name] = Piece(new_posx/SQUARESIZE, y, piece, color, name, True)
+                    draw_board(places_list)
+                    draw_pieces(name)
+                    new_posx -= 1
+                    time.sleep(0.003)
+                else:
+                    if new_posx/SQUARESIZE == self.x:
+                        for p in range(abs(self.x-x)+1):
+                            places_list.append(y)
+                            places_list.append(self.x+p)
+                    del pieces[name]
+                    pieces[name] = Piece(new_posx/SQUARESIZE, y, piece, color, name, True)
+                    draw_board(places_list)
+                    draw_pieces(name)
+                    new_posx += 1
+                    time.sleep(0.003)
+        elif not new_posy / SQUARESIZE == y and not new_posx / SQUARESIZE == x:
+            for i in range(SQUARESIZE*(abs(self.x-x))):
+                if self.x > x and self.y > y:
+                    if new_posx / SQUARESIZE == self.x:
+                        for p in range(abs(self.x - x) + 1):
+                            p *= -1
+                            places_list.append(self.y + p)
+                            places_list.append(self.x + p)
+                        for p in range(0, abs(self.x - x)*2, 2):
+                            places_list.append(places_list[p])
+                            places_list.append(places_list[p+1] - 1)
+                            places_list.append(places_list[p] - 1)
+                            places_list.append(places_list[p+1])
+                    del pieces[name]
+                    pieces[name] = Piece(new_posx / SQUARESIZE, new_posy/SQUARESIZE, piece, color, name, True)
+                    draw_board(places_list)
+                    draw_pieces(name)
+                    new_posx -= 1
+                    new_posy -= 1
+                    time.sleep(0.003)
+                elif self.x < x and self.y < y:
+                    if new_posx / SQUARESIZE == self.x:
+                        for p in range(abs(self.x - x) + 1):
+                            places_list.append(self.y + p)
+                            places_list.append(self.x + p)
+                        for p in range(0, abs(self.x - x)*2, 2):
+                            places_list.append(places_list[p])
+                            places_list.append(places_list[p+1] + 1)
+                            places_list.append(places_list[p] + 1)
+                            places_list.append(places_list[p+1])
+                    del pieces[name]
+                    pieces[name] = Piece(new_posx / SQUARESIZE, new_posy/SQUARESIZE, piece, color, name, True)
+                    draw_board(places_list)
+                    draw_pieces(name)
+                    new_posx += 1
+                    new_posy += 1
+                    time.sleep(0.003)
         pieces[name] = Piece(x, y, piece, color, name, True)
         turn += 1
         self.chess_check()
@@ -622,54 +695,74 @@ class Piece:
             for i in range(ROW_COUNT - 1):
                 i += 1
                 try:
-                    if (not places["R" + str(self.y + i) + "C" + str(self.x + i)] == KeyError) and \
-                            (self.x == x + i and self.y + i == y):
-                        return True
-                    elif places["R" + str(self.y + i) + "C" + str(self.x + i)] == KeyError:
-                        break
+                    if not places["R" + str(self.y + i) + "C" + str(self.x + i)] == "":
+                        if self.x + i == x and self.y + i == y:
+                            if not self.is_same(places["R" + str(posy) + "C" + str(posx)]):
+                                return True
+                            else:
+                                break
+                        else:
+                            break
+                    elif places["R" + str(self.y + i) + "C" + str(self.x + i)] == "":
+                        if self.x + i == x and self.y + i == y:
+                            return True
+                        else:
+                            continue
                 except KeyError:
-                    if self.x == x + i and self.y + i == y:
-                        return True
-                else:
                     continue
             for i in range(ROW_COUNT - 1):
                 i += 1
                 try:
-                    if (not places["R" + str(self.y - i) + "C" + str(self.x + i)] == KeyError) and \
-                            (self.x == x + i and self.y - i == y):
-                        return True
-                    elif places["R" + str(self.y - i) + "C" + str(self.x + i)] == KeyError:
-                        break
+                    if not places["R" + str(self.y - i) + "C" + str(self.x + i)] == "":
+                        if self.x + i == x and self.y - i == y:
+                            if not self.is_same(places["R" + str(posy) + "C" + str(posx)]):
+                                return True
+                            else:
+                                break
+                        else:
+                            break
+                    elif places["R" + str(self.y - i) + "C" + str(self.x + i)] == "":
+                        if self.x + i == x and self.y - i == y:
+                            return True
+                        else:
+                            continue
                 except KeyError:
-                    if self.x == x + i and self.y - i == y:
-                        return True
-                else:
                     continue
             for i in range(ROW_COUNT - 1):
                 i += 1
                 try:
-                    if (not places["R" + str(y) + "C" + str(x)] == KeyError) and \
-                            (self.x == x - i and self.y == y + i):
-                        return True
-                    elif places["R" + str(self.y + i) + "C" + str(self.x - i)] == KeyError:
-                        break
+                    if not places["R" + str(self.y + i) + "C" + str(self.x - i)] == "":
+                        if self.x - i == x and self.y + i == y:
+                            if not self.is_same(places["R" + str(posy) + "C" + str(posx)]):
+                                return True
+                            else:
+                                break
+                        else:
+                            break
+                    elif places["R" + str(self.y + i) + "C" + str(self.x - i)] == "":
+                        if self.x - i == x and self.y + i == y:
+                            return True
+                        else:
+                            continue
                 except KeyError:
-                    if self.x == x - i and self.y == y + i:
-                        return True
-                else:
                     continue
             for i in range(ROW_COUNT - 1):
                 i += 1
                 try:
-                    if (not places["R" + str(self.y - i) + "C" + str(self.x - i)] == KeyError) and \
-                            (self.x == x - i and self.y == y - i):
-                        return True
-                    elif places["R" + str(self.y - i) + "C" + str(self.x - i)] == KeyError:
-                        break
+                    if not places["R" + str(self.y - i) + "C" + str(self.x - i)] == "":
+                        if self.x - i == x and self.y - i == y:
+                            if not self.is_same(places["R" + str(posy) + "C" + str(posx)]):
+                                return True
+                            else:
+                                break
+                        else:
+                            break
+                    elif places["R" + str(self.y - i) + "C" + str(self.x - i)] == "":
+                        if self.x - i == x and self.y - i == y:
+                            return True
+                        else:
+                            continue
                 except KeyError:
-                    if self.x == x - i and self.y == y - i:
-                        return True
-                else:
                     continue
         elif self.piece == 6:
             if (self.x == x + 1 and self.y - 1 == y) or (self.x == x - 1 and self.y - 1 == y) or \
