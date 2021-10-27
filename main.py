@@ -117,61 +117,62 @@ black_king = pygame.transform.scale(black_king, (SQUARESIZE, SQUARESIZE))
 def draw_pieces(piece=""):
 
     if not piece == "":
-        if pieces[piece].color == 1:
-            if pieces[piece].piece == 1 and pieces[piece].shown:
-                screen.blit(white_pawn, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                         (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-            if pieces[piece].piece == 2 and pieces[piece].shown:
+        for p in range(len(piece)):
+            if pieces[piece[p]].color == 1:
+                if pieces[piece[p]].piece == 1 and pieces[piece[p]].shown:
+                    screen.blit(white_pawn, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                             (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+                if pieces[piece[p]].piece == 2 and pieces[piece[p]].shown:
 
-                screen.blit(white_rook, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                         (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-            if pieces[piece].piece == 3 and pieces[piece].shown:
+                    screen.blit(white_rook, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                             (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+                if pieces[piece[p]].piece == 3 and pieces[piece[p]].shown:
 
-                screen.blit(white_knight, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                           (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-            if pieces[piece].piece == 4 and pieces[piece].shown:
+                    screen.blit(white_knight, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                               (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+                if pieces[piece[p]].piece == 4 and pieces[piece[p]].shown:
 
-                screen.blit(white_bishop, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                           (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-            if pieces[piece].piece == 5 and pieces[piece].shown:
+                    screen.blit(white_bishop, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                               (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+                if pieces[piece[p]].piece == 5 and pieces[piece[p]].shown:
 
-                screen.blit(white_queen, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                          (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-            if pieces[piece].piece == 6 and pieces[piece].shown:
+                    screen.blit(white_queen, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                              (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+                if pieces[piece[p]].piece == 6 and pieces[piece[p]].shown:
 
-                screen.blit(white_king, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                         (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-        else:
-            if pieces[piece].piece == 1 and pieces[piece].shown:
-                screen.blit(black_pawn, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                         (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-            if pieces[piece].piece == 2 and pieces[piece].shown:
-                screen.blit(black_rook, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                         (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-            if pieces[piece].piece == 3 and pieces[piece].shown:
-                screen.blit(black_knight, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                           (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-            if pieces[piece].piece == 4 and pieces[piece].shown:
-                screen.blit(black_bishop, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                           (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-            if pieces[piece].piece == 5 and pieces[piece].shown:
-                screen.blit(black_queen, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                          (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
-            if pieces[piece].piece == 6 and pieces[piece].shown:
-                screen.blit(black_king, ((pieces[piece].x*SQUARESIZE)-SQUARESIZE,
-                                         (pieces[piece].y*SQUARESIZE)-SQUARESIZE))
-                pygame.display.update()
+                    screen.blit(white_king, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                             (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+            else:
+                if pieces[piece[p]].piece == 1 and pieces[piece[p]].shown:
+                    screen.blit(black_pawn, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                             (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+                if pieces[piece[p]].piece == 2 and pieces[piece[p]].shown:
+                    screen.blit(black_rook, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                             (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+                if pieces[piece[p]].piece == 3 and pieces[piece[p]].shown:
+                    screen.blit(black_knight, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                               (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+                if pieces[piece[p]].piece == 4 and pieces[piece[p]].shown:
+                    screen.blit(black_bishop, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                               (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+                if pieces[piece[p]].piece == 5 and pieces[piece[p]].shown:
+                    screen.blit(black_queen, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                              (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
+                if pieces[piece[p]].piece == 6 and pieces[piece[p]].shown:
+                    screen.blit(black_king, ((pieces[piece[p]].x*SQUARESIZE)-SQUARESIZE,
+                                             (pieces[piece[p]].y*SQUARESIZE)-SQUARESIZE))
+                    pygame.display.update()
     else:
         for x in range(len(pieces)):
             x += 1
@@ -265,6 +266,7 @@ class Piece:
     def move_piece(self, x, y):
         global selected, turn
         places_list = []
+        pieces_list = [self.name]
         name = self.name
         piece = self.piece
         color = self.color
@@ -274,7 +276,7 @@ class Piece:
         places["R" + str(self.y) + "C" + str(self.x)] = ""
         # pieces[name] = Piece(x, y, piece, color, name, True)
         if not math.floor(new_posy/SQUARESIZE) == y and int(new_posx/SQUARESIZE) == x:
-            for i in range(SQUARESIZE*(abs(self.y-y))):
+            for i in range(int(SQUARESIZE*(abs(self.y-y)))):
                 if self.y > y:
                     if new_posy/SQUARESIZE == self.y:
                         for p in range(abs(self.y-y)+1):
@@ -284,7 +286,7 @@ class Piece:
                     del pieces[name]
                     pieces[name] = Piece(x, new_posy/SQUARESIZE, piece, color, name, True)
                     draw_board(places_list)
-                    draw_pieces(name)
+                    draw_pieces(pieces_list)
                     new_posy -= 1
                     time.sleep(0.003)
                 else:
@@ -296,7 +298,7 @@ class Piece:
                     del pieces[name]
                     pieces[name] = Piece(x, new_posy / SQUARESIZE, piece, color, name, True)
                     draw_board(places_list)
-                    draw_pieces(name)
+                    draw_pieces(pieces_list)
                     new_posy += 1
                     time.sleep(0.003)
         elif math.floor(new_posy/SQUARESIZE) == y and not int(new_posx/SQUARESIZE) == x:
@@ -310,7 +312,7 @@ class Piece:
                     del pieces[name]
                     pieces[name] = Piece(new_posx/SQUARESIZE, y, piece, color, name, True)
                     draw_board(places_list)
-                    draw_pieces(name)
+                    draw_pieces(pieces_list)
                     new_posx -= 1
                     time.sleep(0.003)
                 else:
@@ -321,7 +323,7 @@ class Piece:
                     del pieces[name]
                     pieces[name] = Piece(new_posx/SQUARESIZE, y, piece, color, name, True)
                     draw_board(places_list)
-                    draw_pieces(name)
+                    draw_pieces(pieces_list)
                     new_posx += 1
                     time.sleep(0.003)
         elif not new_posy / SQUARESIZE == y and not new_posx / SQUARESIZE == x:
@@ -337,10 +339,15 @@ class Piece:
                             places_list.append(places_list[p+1] - 1)
                             places_list.append(places_list[p] - 1)
                             places_list.append(places_list[p+1])
+                        for p in range(abs(self.x - x)*2+2, ((self.x - x)*2+2)*2, 2):
+                            print("hi")
+                            pieces_list.append(pieces[places["R" + str(places_list[p]) + "C" + str(places_list[p+1])]].name)
+
+                    print(pieces_list)
                     del pieces[name]
                     pieces[name] = Piece(new_posx / SQUARESIZE, new_posy/SQUARESIZE, piece, color, name, True)
                     draw_board(places_list)
-                    draw_pieces(name)
+                    draw_pieces(pieces_list)
                     new_posx -= 1
                     new_posy -= 1
                     time.sleep(0.003)
@@ -373,46 +380,46 @@ class Piece:
 
     def select(self):
         global selected, selected_piece
-        if not admin:
-            if self.color == 1:
-                if not turn % 2 == 0:
-                    if selected:
-                        draw_board()
-                        pygame.display.update()
-                        selected = False
-
-                    pygame.draw.lines(screen, YELLOW, True, [((self.x*SQUARESIZE)-SQUARESIZE-5,
-                                                              (self.y*SQUARESIZE)-SQUARESIZE),
-                                                             ((self.x*SQUARESIZE), (self.y*SQUARESIZE)-SQUARESIZE),
-                                                             ((self.x*SQUARESIZE), (self.y*SQUARESIZE)),
-                                                             ((self.x*SQUARESIZE)-SQUARESIZE, (self.y*SQUARESIZE))], 5)
-                    selected_piece = self.name
-                    selected = True
-            if self.color == 0:
-                if turn % 2 == 0:
-                    if selected:
-                        draw_board()
-                        pygame.display.update()
-                        selected = False
-
-                    pygame.draw.lines(screen, YELLOW, True,
-                                      [((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE) - SQUARESIZE),
-                                       ((self.x * SQUARESIZE), (self.y * SQUARESIZE) - SQUARESIZE),
-                                       ((self.x * SQUARESIZE), (self.y * SQUARESIZE)),
-                                       ((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE))], 5)
-                    selected_piece = self.name
-                    selected = True
-        else:
+        # if not admin:
+        #     if self.color == 1:
+        #         if not turn % 2 == 0:
+        #             if selected:
+        #                 draw_board()
+        #                 pygame.display.update()
+        #                 selected = False
+        #
+        #             pygame.draw.lines(screen, YELLOW, True, [((self.x*SQUARESIZE)-SQUARESIZE-5,
+        #                                                       (self.y*SQUARESIZE)-SQUARESIZE),
+        #                                                      ((self.x*SQUARESIZE), (self.y*SQUARESIZE)-SQUARESIZE),
+        #                                                      ((self.x*SQUARESIZE), (self.y*SQUARESIZE)),
+        #                                                      ((self.x*SQUARESIZE)-SQUARESIZE, (self.y*SQUARESIZE))], 5)
+        #             selected_piece = self.name
+        #             selected = True
+        #     if self.color == 0:
+        #         if turn % 2 == 0:
+        #             if selected:
+        #                 draw_board()
+        #                 pygame.display.update()
+        #                 selected = False
+        #
+        #             pygame.draw.lines(screen, YELLOW, True,
+        #                               [((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE) - SQUARESIZE),
+        #                                ((self.x * SQUARESIZE), (self.y * SQUARESIZE) - SQUARESIZE),
+        #                                ((self.x * SQUARESIZE), (self.y * SQUARESIZE)),
+        #                                ((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE))], 5)
+        #             selected_piece = self.name
+        #             selected = True
+        if selected:
             draw_board()
             pygame.display.update()
-
-            pygame.draw.lines(screen, YELLOW, True,
-                              [((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE) - SQUARESIZE),
-                               ((self.x * SQUARESIZE), (self.y * SQUARESIZE) - SQUARESIZE),
-                               ((self.x * SQUARESIZE), (self.y * SQUARESIZE)),
-                               ((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE))], 5)
+            selected = False
+        else:
+            pygame.draw.lines(screen, YELLOW, True, [((self.x * SQUARESIZE) - SQUARESIZE,
+                                                      (self.y * SQUARESIZE) - SQUARESIZE),
+                                                     ((self.x * SQUARESIZE), (self.y * SQUARESIZE) - SQUARESIZE),
+                                                     ((self.x * SQUARESIZE), (self.y * SQUARESIZE)),
+                                                     ((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE))], 5)
             selected_piece = self.name
-
             selected = True
 
     def check(self, x, y):
@@ -904,7 +911,6 @@ class Piece:
                 else:
                     pass
         selected_piece = ""
-        selected = False
 
 
 board = create_board()
@@ -967,7 +973,7 @@ while not game_over:
                 try:
                     if not places["R" + str(posy) + "C" + str(posx)] == "":
                         if ((not selected) or (not pieces[selected_piece].check(posx, posy)) or
-                                pieces[selected_piece].is_same(places["R" + str(posy) + "C" + str(posx)])) and not \
+                            pieces[selected_piece].is_same(places["R" + str(posy) + "C" + str(posx)])) and not \
                                 pieces[selected_piece].castle_check(places["R" + str(posy) + "C" + str(posx)]):
                             pieces[places["R" + str(posy) + "C" + str(posx)]].select()
                         else:
