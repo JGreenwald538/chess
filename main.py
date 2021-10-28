@@ -43,6 +43,7 @@ def create_board():
 def draw_board(placess = ""):
     global creation
     if not placess == "":
+
         for i in range(0, len(placess), 2):
             even_y = placess[i] % 2 == 0
             even_x = placess[i+1] % 2 == 0
@@ -50,16 +51,20 @@ def draw_board(placess = ""):
             odd_x = not placess[i + 1] % 2 == 0
 
             if odd_y and odd_x:
-                pygame.draw.rect(screen, yellow, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE) - SQUARESIZE,
+                pygame.draw.rect(screen, yellow, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE)
+                                                  - SQUARESIZE,
                                                   SQUARESIZE, SQUARESIZE))
             elif even_y and odd_x:
-                pygame.draw.rect(screen, purple, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE) - SQUARESIZE,
+                pygame.draw.rect(screen, purple, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE)
+                                                  - SQUARESIZE,
                                                   SQUARESIZE, SQUARESIZE))
             elif even_y and even_x:
-                pygame.draw.rect(screen, yellow, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE) - SQUARESIZE,
+                pygame.draw.rect(screen, yellow, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE)
+                                                  - SQUARESIZE,
                                                   SQUARESIZE, SQUARESIZE))
             elif odd_y and even_x:
-                pygame.draw.rect(screen, purple, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE) - SQUARESIZE,
+                pygame.draw.rect(screen, purple, ((placess[i + 1] * SQUARESIZE) - SQUARESIZE, (placess[i] * SQUARESIZE)
+                                                  - SQUARESIZE,
                                                   SQUARESIZE, SQUARESIZE))
     if placess == "":
         for r in range(ROW_COUNT):
@@ -274,7 +279,6 @@ class Piece:
         new_posy = self.y*SQUARESIZE
         places["R" + str(y) + "C" + str(x)] = self.name
         places["R" + str(self.y) + "C" + str(self.x)] = ""
-        # pieces[name] = Piece(x, y, piece, color, name, True)
         if not math.floor(new_posy/SQUARESIZE) == y and int(new_posx/SQUARESIZE) == x:
             for i in range(int(SQUARESIZE*(abs(self.y-y)))):
                 if self.y > y:
@@ -339,11 +343,6 @@ class Piece:
                             places_list.append(places_list[p+1] - 1)
                             places_list.append(places_list[p] - 1)
                             places_list.append(places_list[p+1])
-                        for p in range(abs(self.x - x)*2+2, ((self.x - x)*2+2)*2, 2):
-                            print("hi")
-                            pieces_list.append(pieces[places["R" + str(places_list[p]) + "C" + str(places_list[p+1])]].name)
-
-                    print(pieces_list)
                     del pieces[name]
                     pieces[name] = Piece(new_posx / SQUARESIZE, new_posy/SQUARESIZE, piece, color, name, True)
                     draw_board(places_list)
@@ -362,65 +361,69 @@ class Piece:
                             places_list.append(places_list[p] + 1)
                             places_list.append(places_list[p+1])
                     del pieces[name]
-                    pieces[name] = Piece(new_posx / SQUARESIZE, new_posy/SQUARESIZE, piece, color, name, True)
+                    pieces[name] = Piece(new_posx / SQUARESIZE, new_posy / SQUARESIZE, piece, color, name, True)
                     draw_board(places_list)
-                    draw_pieces(name)
-                    new_posx += 1
-                    new_posy += 1
+                    draw_pieces(pieces_list)
+                    new_posx -= 1
+                    new_posy -= 1
                     time.sleep(0.003)
         pieces[name] = Piece(x, y, piece, color, name, True)
         turn += 1
         self.chess_check()
         if self.piece == 6 and not (piece == pieces[places["R" + str(y) + "C" + str(x)]].piece):
             self.chess_check_coords(self.x, self.y)
-        selected = False
         draw_board()
         draw_pieces(name)
         pygame.display.update()
 
     def select(self):
         global selected, selected_piece
-        # if not admin:
-        #     if self.color == 1:
-        #         if not turn % 2 == 0:
-        #             if selected:
-        #                 draw_board()
-        #                 pygame.display.update()
-        #                 selected = False
-        #
-        #             pygame.draw.lines(screen, YELLOW, True, [((self.x*SQUARESIZE)-SQUARESIZE-5,
-        #                                                       (self.y*SQUARESIZE)-SQUARESIZE),
-        #                                                      ((self.x*SQUARESIZE), (self.y*SQUARESIZE)-SQUARESIZE),
-        #                                                      ((self.x*SQUARESIZE), (self.y*SQUARESIZE)),
-        #                                                      ((self.x*SQUARESIZE)-SQUARESIZE, (self.y*SQUARESIZE))], 5)
-        #             selected_piece = self.name
-        #             selected = True
-        #     if self.color == 0:
-        #         if turn % 2 == 0:
-        #             if selected:
-        #                 draw_board()
-        #                 pygame.display.update()
-        #                 selected = False
-        #
-        #             pygame.draw.lines(screen, YELLOW, True,
-        #                               [((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE) - SQUARESIZE),
-        #                                ((self.x * SQUARESIZE), (self.y * SQUARESIZE) - SQUARESIZE),
-        #                                ((self.x * SQUARESIZE), (self.y * SQUARESIZE)),
-        #                                ((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE))], 5)
-        #             selected_piece = self.name
-        #             selected = True
-        if selected:
-            draw_board()
-            pygame.display.update()
-            selected = False
+        if not admin:
+            if self.color == 1:
+                if not turn % 2 == 0:
+                    if selected:
+                        draw_board()
+                        pygame.display.update()
+                        selected = False
+
+                    pygame.draw.lines(screen, YELLOW, True, [((self.x*SQUARESIZE)-SQUARESIZE-5,
+                                                              (self.y*SQUARESIZE)-SQUARESIZE),
+                                                             ((self.x*SQUARESIZE), (self.y*SQUARESIZE)-SQUARESIZE),
+                                                             ((self.x*SQUARESIZE), (self.y*SQUARESIZE)),
+                                                             ((self.x*SQUARESIZE)-SQUARESIZE, (self.y*SQUARESIZE))], 5)
+                    selected_piece = self.name
+                    selected = True
+            if self.color == 0:
+                if turn % 2 == 0:
+                    if selected:
+                        draw_board()
+                        pygame.display.update()
+                        selected = False
+
+                    pygame.draw.lines(screen, YELLOW, True,
+                                      [((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE) - SQUARESIZE),
+                                       ((self.x * SQUARESIZE), (self.y * SQUARESIZE) - SQUARESIZE),
+                                       ((self.x * SQUARESIZE), (self.y * SQUARESIZE)),
+                                       ((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE))], 5)
+                    selected_piece = self.name
+                    selected = True
         else:
-            pygame.draw.lines(screen, YELLOW, True, [((self.x * SQUARESIZE) - SQUARESIZE,
-                                                      (self.y * SQUARESIZE) - SQUARESIZE),
-                                                     ((self.x * SQUARESIZE), (self.y * SQUARESIZE) - SQUARESIZE),
-                                                     ((self.x * SQUARESIZE), (self.y * SQUARESIZE)),
-                                                     ((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE))], 5)
-            selected_piece = self.name
-            selected = True
+            if not selected:
+                draw_board()
+                pygame.display.update()
+
+                pygame.draw.lines(screen, YELLOW, True,
+                                  [((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE) - SQUARESIZE),
+                                   ((self.x * SQUARESIZE), (self.y * SQUARESIZE) - SQUARESIZE),
+                                   ((self.x * SQUARESIZE), (self.y * SQUARESIZE)),
+                                   ((self.x * SQUARESIZE) - SQUARESIZE, (self.y * SQUARESIZE))], 5)
+                selected_piece = self.name
+
+                selected = True
+            else:
+                selected = False
+                draw_board()
+                pygame.display.update()
 
     def check(self, x, y):
         if self.piece == 1 and self.color == 1:
@@ -626,7 +629,7 @@ class Piece:
                 except KeyError:
                     continue
         elif self.piece == 5:
-            for i in range(abs(self.y - posy)):
+            for i in range(int(abs(self.y - posy))):
                 i += 1
                 try:
                     if not places["R" + str(self.y - i) + "C" + str(self.x)] == "":
@@ -645,7 +648,7 @@ class Piece:
                 except KeyError:
                     continue
 
-            for i in range(abs(self.y - posy)):
+            for i in range(int(abs(self.y - posy))):
                 i += 1
                 try:
                     if not places["R" + str(self.y + i) + "C" + str(self.x)] == "":
@@ -663,7 +666,7 @@ class Piece:
                             continue
                 except KeyError:
                     continue
-            for i in range(abs(self.x - posx)):
+            for i in range(int(abs(self.x - posx))):
                 i += 1
                 try:
                     if not places["R" + str(self.y) + "C" + str(self.x - i)] == "":
@@ -681,7 +684,7 @@ class Piece:
                             continue
                 except KeyError:
                     continue
-            for i in range(abs(self.x - posx)):
+            for i in range(int(abs(self.x - posx))):
                 i += 1
                 try:
                     if not places["R" + str(self.y) + "C" + str(self.x + i)] == "":
@@ -795,6 +798,7 @@ class Piece:
         del pieces[piece]
         pieces[piece] = Piece(x, y, piece_type, color, name, False)
         self.move_piece(x, y)
+        draw_board()
         if piece_type == 6:
             self.win()
         self.chess_check()
@@ -895,7 +899,7 @@ class Piece:
                 pass
 
     def chess_check_coords(self, x, y):
-        global selected_piece, selected
+        global selected_piece
         if self.color == 1:
             for i in range(18):
                 i += 1
@@ -970,6 +974,7 @@ while not game_over:
                 pos = pygame.mouse.get_pos()
                 posx = math.ceil(pos[0]/SQUARESIZE)
                 posy = math.ceil(pos[1] / SQUARESIZE)
+
                 try:
                     if not places["R" + str(posy) + "C" + str(posx)] == "":
                         if ((not selected) or (not pieces[selected_piece].check(posx, posy)) or
