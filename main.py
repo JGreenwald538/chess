@@ -364,8 +364,43 @@ class Piece:
                     pieces[name] = Piece(new_posx / SQUARESIZE, new_posy / SQUARESIZE, piece, color, name, True)
                     draw_board(places_list)
                     draw_pieces(pieces_list)
-                    new_posx -= 1
+                    new_posx += 1
+                    new_posy += 1
+                    time.sleep(0.003)
+                elif self.x < x and self.y > y:
+                    if new_posx / SQUARESIZE == self.x:
+                        for p in range(abs(self.x - x) + 1):
+                            p *= -1
+                            places_list.append(self.y + p)
+                            places_list.append(self.x - p)
+                        for p in range(0, abs(self.x - x)*2, 2):
+                            places_list.append(places_list[p])
+                            places_list.append(places_list[p+1] + 1)
+                            places_list.append(places_list[p] - 1)
+                            places_list.append(places_list[p+1])
+                    del pieces[name]
+                    pieces[name] = Piece(new_posx / SQUARESIZE, new_posy/SQUARESIZE, piece, color, name, True)
+                    draw_board(places_list)
+                    draw_pieces(pieces_list)
+                    new_posx += 1
                     new_posy -= 1
+                    time.sleep(0.003)
+                elif self.x > x and self.y < y:
+                    if new_posx / SQUARESIZE == self.x:
+                        for p in range(abs(self.x - x) + 1):
+                            places_list.append(self.y + p)
+                            places_list.append(self.x - p)
+                        for p in range(0, abs(self.x - x)*2, 2):
+                            places_list.append(places_list[p])
+                            places_list.append(places_list[p+1] - 1)
+                            places_list.append(places_list[p] + 1)
+                            places_list.append(places_list[p+1])
+                    del pieces[name]
+                    pieces[name] = Piece(new_posx / SQUARESIZE, new_posy / SQUARESIZE, piece, color, name, True)
+                    draw_board(places_list)
+                    draw_pieces(pieces_list)
+                    new_posx -= 1
+                    new_posy += 1
                     time.sleep(0.003)
         pieces[name] = Piece(x, y, piece, color, name, True)
         turn += 1
